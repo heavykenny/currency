@@ -16,7 +16,7 @@
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s4 offset-l4">
-                    <input placeholder="Convert From" id="amount" type="number" class="validate" value="1">
+                    <input placeholder="Convert From" id="amount" type="number" class="validate" value="0">
                     <label for="amount">AMOUNT</label>
                 </div>
             </div>
@@ -72,9 +72,7 @@
         let from = from_currency.val();
         let to = to_currency.val();
 
-        from_currency_value.html(from);
-        to_currency_value.html(to);
-        from_amount_value.html(amount_value);
+        updatePage();
 
         amount.change(function () {
             getCurrency();
@@ -92,9 +90,7 @@
             from = from_currency.val();
             to = to_currency.val();
 
-            from_currency_value.html(from);
-            to_currency_value.html(to);
-            from_amount_value.html(formatCurrency(amount_value));
+            updatePage();
 
             $.ajax({
                 url: "/converter?amount=" + amount_value + "&from=" + from + "&to=" + to + "",
@@ -113,6 +109,12 @@
         function formatCurrency(value) {
             let num = Number(value);
             return num.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        }
+
+        function updatePage() {
+            from_currency_value.html(from);
+            to_currency_value.html(to);
+            from_amount_value.html(formatCurrency(amount_value));
         }
     });
 </script>

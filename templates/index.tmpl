@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
+    <title>{{.title}}</title>
+</head>
+
+<body>
+<div class="container" style="margin-top: 100px">
+    <h4 class="center">Currency Converter</h4>
+    <div class="row">
+        <form class="col s12">
+            <div class="row">
+                <div class="input-field col s4 offset-l4">
+                    <input placeholder="Convert From" id="amount" type="number" class="validate" value="1">
+                    <label for="amount">AMOUNT</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s4 offset-l2">
+                    <select id="from_currency">
+                        <option value="USD">USD</option>
+                        <option selected value="NGN">NGN</option>
+                        <option value="EUR">EUR</option>
+                        <option value="CAD">CAD</option>
+                        <option value="BTC">BTC</option>
+                    </select>
+                    <label>From Currency</label>
+                </div>
+                <div class="input-field col s4">
+                    <select id="to_currency">
+                        <option selected value="USD">USD</option>
+                        <option value="NGN">NGN</option>
+                        <option value="EUR">EUR</option>
+                        <option value="CAD">CAD</option>
+                        <option value="BTC">BTC</option>
+                    </select>
+                    <label>To Currency</label>
+                </div>
+            </div>
+        </form>
+    </div>
+    <h2 class="center">
+        <span id="from_currency_value">NGN</span>
+        <span id="from_amount_value">0.00</span>
+        <span>&harr;</span>
+        <span id="to_currency_value">USD</span>
+        <span id="to_amount_value">0.00</span>
+    </h2>
+</div>
+<!-- Compiled and minified JavaScript -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('select').formSelect();
+
+        let amount = $("#amount");
+        let from_currency = $("#from_currency");
+        let to_currency = $("#to_currency");
+        let from_currency_value = $("#from_currency_value");
+        let to_currency_value = $("#to_currency_value");
+
+        let from_amount_value = $("#from_amount_value");
+        let to_amount_value = $("#to_amount_value");
+
+        let amount_value = amount.val();
+        let from = from_currency.val();
+        let to = to_currency.val();
+
+        from_currency_value.html(from);
+        to_currency_value.html(to);
+        from_amount_value.html(amount_value);
+
+        amount.change(function () {
+            getCurrency();
+        });
+
+        from_currency.change(function () {
+            getCurrency();
+        });
+        to_currency.change(function () {
+            getCurrency();
+        });
+
+        function getCurrency() {
+            amount_value = amount.val();
+            from = from_currency.val();
+            to = to_currency.val();
+
+            from_currency_value.html(from);
+            to_currency_value.html(to);
+            from_amount_value.html(formatCurrency(amount_value));
+
+            $.ajax({
+                url: "/converter?amount=" + amount_value + "&from=" + from + "&to=" + to + "",
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    to_amount_value.html(formatCurrency(res.amount));
+                },
+                error: function (res) {
+                    console.log(res);
+                    M.toast({html: 'An Error Occurred', classes: 'rounded red'});
+                }
+            });
+        }
+
+        function formatCurrency(value) {
+            let num = Number(value);
+            return num.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+        }
+    });
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 ## Introduction
 This is a simple Currency Converter built with Golang and Materialize CSS using the Fixer currency JSON API (Free Plan).
 
-![1](images/Sample%201.png)
+![1](https://github.com/heavykenny/currency/blob/media/images/Sample%201.png?raw=true)
 
 ## Requirements
 
@@ -36,17 +36,17 @@ This is a simple Currency Converter built with Golang and Materialize CSS using 
 Using this project, you can change the currency from the list of currency listed in the option.
 
 Available currency (NGN, EUR, CAD, USD, BTC)
- ![2](images/Sample%202.png)
+ ![2](https://github.com/heavykenny/currency/blob/media/images/Sample%202.png?raw=true)
  * Examples
  
  1. NGN 10,000 to USD
-  ![3](images/Sample%203.png)
+  ![3](https://github.com/heavykenny/currency/blob/media/images/Sample%203.png?raw=true)
  2. NGN 10,000 to EUR
-  ![4](images/Sample%204.png)
+  ![4](https://github.com/heavykenny/currency/blob/media/images/Sample%204.png?raw=true)
  3. BTC 1 to USD
-  ![5](images/Sample%205.png)
+  ![5](https://github.com/heavykenny/currency/blob/media/images/Sample%205.png?raw=true)
  4. BTC 1 to NGN
-  ![5](images/Sample%206.png)
+  ![5](https://github.com/heavykenny/currency/blob/media/images/Sample%206.png?raw=true)
 
 ## Contributors
 

@@ -7,7 +7,7 @@ This is a simple Currency Converter built with Golang and Materialize CSS using 
 
 ## Requirements
 
-* [Go](https://golang.org) -  v1.19 above
+* [Go](https://golang.org) -  v1.14 above
 * [Materialize CSS](https://materializecss.com) -  v1.0.0 above
 
 ## Installation

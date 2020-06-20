@@ -3,13 +3,26 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func main() {
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal("Error loading .env file", err)
+	}
+	port, exist := os.LookupEnv("PORT")
+
+	if !exist {
+		log.Fatal("PORT must be set")
+	}
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 
@@ -50,7 +63,7 @@ func main() {
 
 		c.JSON(http.StatusOK, response)
 	})
-	router.Run(":8080")
+	router.Run(":" + port)
 }
 
 func getCurrencyValue(currency string, data Currency) float64 {

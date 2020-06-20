@@ -1,7 +1,7 @@
 # Currency Converter
 
 ## Introduction
-This is a simple Currency Converter built with Golang and Materialize CSS using the Fixer currency JSON API (Free Plan).
+This is a simple Currency Converter built with Golang and Materialize CSS using the Fixer currency JSON API (Free Plan). Check it out on https://go-currency.herokuapp.com
 
 ![1](https://github.com/heavykenny/currency/blob/media/images/Sample%201.png?raw=true)
 

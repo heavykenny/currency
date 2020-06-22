@@ -13,16 +13,9 @@ import (
 )
 
 func main() {
-	err := godotenv.Load()
+	//Check ENV variables.
+	envChecks()
 
-	if err != nil {
-		log.Fatal("Error loading .env file", err)
-	}
-	port, exist := os.LookupEnv("PORT")
-
-	if !exist {
-		log.Fatal("PORT must be set")
-	}
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
 
@@ -63,7 +56,27 @@ func main() {
 
 		c.JSON(http.StatusOK, response)
 	})
+	port := os.Getenv("PORT")
 	router.Run(":" + port)
+}
+
+func envChecks() {
+	err := godotenv.Load()
+
+	if err != nil {
+		log.Fatal("Error loading .env file", err)
+	}
+	port, portExist := os.LookupEnv("PORT")
+
+	if !portExist || port == "" {
+		log.Fatal("PORT must be set in .env and not empty")
+	}
+
+	apiToken, apiExist := os.LookupEnv("FIXER_API")
+
+	if !apiExist || apiToken == "" {
+		log.Fatal("FIXER_API must be set in .env and not empty")
+	}
 }
 
 func getCurrencyValue(currency string, data Currency) float64 {
@@ -94,7 +107,7 @@ type Currency struct {
 }
 
 func GetAllCurrency() (Currency, error) {
-	apiToken := "7cff824971c7593c2ef1eaf9ddf7041a"
+	apiToken := os.Getenv("FIXER_API")
 	url := fmt.Sprintf("http://data.fixer.io/api/latest?access_key=%s&format=1", apiToken)
 
 	req, err := http.NewRequest("GET", url, nil)

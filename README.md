@@ -24,6 +24,12 @@ This is a simple Currency Converter built with Golang and Materialize CSS using 
   cd currency
   ```
 
+* Copy .env
+
+  ```bash
+  cp .env.example .env
+  ```
+
 * Run application
 
   ```bash

@@ -9,12 +9,14 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
-func main() {
+func init(){
 	//Check ENV variables.
 	envChecks()
+}
+
+func main() {
 
 	router := gin.Default()
 	router.LoadHTMLGlob("templates/*")
@@ -61,11 +63,6 @@ func main() {
 }
 
 func envChecks() {
-	err := godotenv.Load()
-
-	if err != nil {
-		log.Fatal("Error loading .env file", err)
-	}
 	port, portExist := os.LookupEnv("PORT")
 
 	if !portExist || port == "" {
